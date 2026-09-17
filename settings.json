@@ -1,0 +1,7 @@
+{
+  "lastChangelogVersion": "0.85.1",
+  "theme": "dark",
+  "skills": ["/home/erick/Workspace/skills"],
+  "defaultProvider": "openai-codex",
+  "defaultModel": "gpt-5.5"
+}

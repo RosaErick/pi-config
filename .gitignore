@@ -1,0 +1,9 @@
+# Credenciais, estado local e histórico do Pi
+auth.json
+models-store.json
+sessions/
+trust.json
+node_modules/
+.env
+.env.*
+*.log
