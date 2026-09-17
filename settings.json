@@ -12,7 +12,22 @@
     "npm:pi-mcp-adapter@2.34.0",
     "npm:pi-lens@4.2.0",
     "npm:@companion-ai/feynman@0.3.47",
-    "npm:pi-memory@0.4.2"
+    "npm:pi-memory@0.4.2",
+    {
+      "source": "git:github.com/mitsuhiko/agent-stuff@122e2994adddb113c04764c5697217dae120fcc6",
+      "extensions": [
+        "extensions/btw.ts",
+        "extensions/notify.ts",
+        "extensions/todos.ts",
+        "extensions/control.ts",
+        "extensions/files.ts",
+        "extensions/goal.ts",
+        "extensions/review.ts"
+      ],
+      "skills": [],
+      "prompts": [],
+      "themes": []
+    }
   ],
   "showHardwareCursor": true,
   "tuiMode": "regular"

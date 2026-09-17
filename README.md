@@ -27,6 +27,19 @@ Never delete a directory that is still targeted by a symlink for active credenti
 | `pi-lens` | `4.2.0` | Code navigation and diagnostics |
 | `@companion-ai/feynman` | `0.3.47` | Scientific research tools |
 | `pi-memory` | `0.4.2` | Persistent memory |
+| [`mitsupi`](https://github.com/mitsuhiko/agent-stuff) | Git `122e299` | Selected workflow extensions |
+
+### Enabled Mitsupi extensions
+
+- **btw:** `/btw` side chat for tangential questions.
+- **notify:** terminal notifications when the agent finishes.
+- **todos:** `/todos` task browser and `todo` tool.
+- **control:** `/control-sessions` and tools for messaging live sessions.
+- **files:** `/files` browser with Git status and session references.
+- **goal:** `/goal` objectives with automatic continuation.
+- **review:** `/review` and `/end-review` for code reviews.
+
+Other Mitsupi extensions, skills, prompts, and themes are disabled. Notifications require a compatible terminal; Quick Look in `/files` is macOS-only.
 
 ## License
 
