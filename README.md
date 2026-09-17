@@ -1,58 +1,50 @@
-# Configuração global do Pi
+# Pi Agent Configuration
 
-`~/.pi/agent` é um link simbólico para `/home/erick/Workspace/pi-agent-config`.
-Assim, inclusive gravações que substituem arquivos atomicamente chegam ao repositório.
+Version-controlled global configuration for [Pi](https://pi.dev), with private data and generated files excluded from Git.
 
-## O que pode ser versionado
+## Setup
 
-- `settings.json`: preferências, modelos selecionados, fontes de recursos e lista de packages.
-- `keybindings.json`: atalhos.
-- `AGENTS.md`, `AGENTS.override.md`, `CLAUDE.md`, `SYSTEM.md`, `APPEND_SYSTEM.md`: instruções globais.
-- `extensions/`, `skills/`, `prompts/`, `themes/`: recursos próprios.
-- `package.json` e lockfiles da raiz: dependências de recursos próprios, se necessários.
+1. Install Pi and clone this repository to a location of your choice.
+2. Review `settings.json`: adjust local paths, select your preferred models, and review package sources before running Pi.
+3. Back up any existing `~/.pi/agent` directory, including credentials and sessions, before replacing it with a symlink to your clone. Alternatively, copy only the settings you need into your existing configuration.
+4. Configure authentication locally and install any external skills referenced by your settings.
 
-Diretórios vazios não são registrados pelo Git. A configuração de projetos (`.pi/` dentro de cada projeto) deve ser versionada no respectivo projeto.
-As skills externas em `/home/erick/Workspace/skills` continuam no repositório próprio; aqui fica somente sua referência.
+Never delete a directory that is still targeted by a symlink for active credentials or sessions.
 
-## Dados privados e gerados
+## Repository scope
 
-A política de `.gitignore` permite explicitamente as configurações conhecidas e ignora novos arquivos na raiz por padrão.
-Credenciais, sessões, catálogo/cache de modelos, decisões de confiança, packages baixados (`npm/` e `git/`) e dependências não são versionados.
-`models.json` também fica excluído por poder conter chaves e headers sensíveis; revise e crie um exemplo sanitizado separadamente se precisar compartilhar provedores customizados.
+The `.gitignore` allowlist supports:
 
-Os dados preexistentes foram preservados fisicamente em `~/.pi/agent-local/`, com permissão 0700:
+- `settings.json` and optional `keybindings.json`.
+- Global instructions and system prompt files.
+- Custom resources in `extensions/`, `skills/`, `prompts/`, and `themes/`.
+- Root dependency manifests and lockfiles.
 
-- `auth.json`
-- `models-store.json`
-- `sessions/`
+Optional files and empty directories may not be present. Keep project-specific `.pi/` configuration in its own project repository and manage external skills separately.
 
-O diretório do Pi contém links ignorados para esses itens. Não apague `~/.pi/agent-local/`: ele contém dados ativos, não um backup.
-Outros arquivos de estado criados futuramente podem ficar no diretório do repositório, mas são ignorados pela política padrão.
+## Privacy
 
-**Limite de segurança:** `.gitignore` não detecta segredos dentro de arquivos permitidos nem impede `git add -f`. Não grave tokens, senhas, URLs autenticadas ou informações privadas em settings, instruções ou código versionado. Use variáveis de ambiente/armazenamento de credenciais. Revise o diff antes de cada commit e antes de publicar.
+New root files are ignored unless explicitly allowed. Credentials, sessions, model configuration and caches, trust decisions, downloaded packages, and dependencies are excluded. Keep custom provider configuration in an untracked `models.json`.
 
-## Packages
+**Git ignore rules are not secret detection.** Never put credentials or private information in tracked files. Use environment variables or local credential storage, and review changes before committing or publishing.
 
-`pi install` global registra a fonte em `settings.json`; os arquivos baixados ficam ignorados. Fixe versões npm ou refs Git para maior reprodutibilidade. Uma atualização sem mudança na referência configurada pode não gerar diff.
-O Pi pode instalar packages ausentes ao iniciar; revise as fontes antes de usar este repositório em outra máquina.
-Instalações com `-l` pertencem ao projeto e não entram neste repositório.
+## Maintenance
 
-## Fluxo de versionamento
+Review package sources before installing them; third-party extensions can execute code. Pin package versions or Git refs when reproducibility matters.
 
-Não há commit ou push automático:
+From the repository directory:
 
 ```bash
-cd ~/Workspace/pi-agent-config
 git status --short
 git diff
-# Revise os arquivos novos também antes de adicioná-los.
-git add .
+# Review new files before staging them.
+git add <reviewed-files>
 git diff --cached
-git commit -m "Atualiza configuração do Pi"
+git commit -m "Update Pi configuration"
 ```
 
-Após mudanças manuais, use `/reload` no Pi ou reinicie-o quando necessário.
+Use `/reload` to refresh supported resources, or restart Pi after configuration changes. Commits and pushes are manual.
 
-## Outra máquina
+## License
 
-Clone o repositório, ajuste caminhos locais no `settings.json` e preserve o diretório `~/.pi/agent` existente antes de substituí-lo por um link para o clone. Faça login novamente; credenciais e histórico não acompanham o Git. As fontes externas de skills precisam estar disponíveis separadamente.
+[MIT](LICENSE). Third-party packages retain their own licenses.
