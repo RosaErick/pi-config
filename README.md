@@ -13,7 +13,7 @@ Never delete a directory that is still targeted by a symlink for active credenti
 
 ## Configuration
 
-- **Model:** `gpt-5.5` via `openai-codex`.
+- **Model:** `gpt-6-astra` via `openai-codex`.
 - **Interface:** dark theme, regular terminal UI, hardware cursor enabled.
 - **Skills:** external skill directory configured in `settings.json`.
 
