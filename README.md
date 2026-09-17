@@ -1,6 +1,6 @@
 # Pi Agent Configuration
 
-Version-controlled global configuration for [Pi](https://pi.dev), with private data and generated files excluded from Git.
+Global settings and custom resources for [Pi](https://pi.dev).
 
 ## Setup
 
@@ -11,39 +11,22 @@ Version-controlled global configuration for [Pi](https://pi.dev), with private d
 
 Never delete a directory that is still targeted by a symlink for active credentials or sessions.
 
-## Repository scope
+## Configuration
 
-The `.gitignore` allowlist supports:
+- **Model:** `gpt-5.5` via `openai-codex`.
+- **Interface:** dark theme, regular terminal UI, hardware cursor enabled.
+- **Skills:** external skill directory configured in `settings.json`.
 
-- `settings.json` and optional `keybindings.json`.
-- Global instructions and system prompt files.
-- Custom resources in `extensions/`, `skills/`, `prompts/`, and `themes/`.
-- Root dependency manifests and lockfiles.
+### Packages
 
-Optional files and empty directories may not be present. Keep project-specific `.pi/` configuration in its own project repository and manage external skills separately.
-
-## Privacy
-
-New root files are ignored unless explicitly allowed. Credentials, sessions, model configuration and caches, trust decisions, downloaded packages, and dependencies are excluded. Keep custom provider configuration in an untracked `models.json`.
-
-**Git ignore rules are not secret detection.** Never put credentials or private information in tracked files. Use environment variables or local credential storage, and review changes before committing or publishing.
-
-## Maintenance
-
-Review package sources before installing them; third-party extensions can execute code. Pin package versions or Git refs when reproducibility matters.
-
-From the repository directory:
-
-```bash
-git status --short
-git diff
-# Review new files before staging them.
-git add <reviewed-files>
-git diff --cached
-git commit -m "Update Pi configuration"
-```
-
-Use `/reload` to refresh supported resources, or restart Pi after configuration changes. Commits and pushes are manual.
+| Package | Version | Purpose |
+| --- | --- | --- |
+| `pi-subagents` | `0.68.0` | Agent delegation and workflows |
+| `pi-web-access` | `0.29.0` | Web search and content fetching |
+| `pi-mcp-adapter` | `2.34.0` | MCP server integration |
+| `pi-lens` | `4.2.0` | Code navigation and diagnostics |
+| `@companion-ai/feynman` | `0.3.47` | Scientific research tools |
+| `pi-memory` | `0.4.2` | Persistent memory |
 
 ## License
 
